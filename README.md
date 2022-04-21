@@ -1,4 +1,4 @@
-# testlet
+# Testlet
 In the assessments industry, items are test questions to be answered by candidates. Items can be pretest or 
 operational. Pretest items don’t count towards a candidate’s score. 
 Candidates are given a set of items they need to answer. This set is called a Testlet.
