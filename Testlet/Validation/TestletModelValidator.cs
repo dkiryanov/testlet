@@ -24,14 +24,14 @@ namespace Testlet.Validation
                 throw new ArgumentNullException(nameof(model.Items));
             }
 
-            int pretestItemsCount = model.Items.Count(item => item.ItemType == ItemTypes.Pretest);
+            int pretestItemsCount = model.Items.Count(item => item.ItemType == ItemTypeEnum.Pretest);
 
             if (pretestItemsCount != model.PretestItemsCount)
             {
                 throw new TestletValidationException($"Pretest items count should be {model.PretestItemsCount}");
             }
 
-            int operationalCount = model.Items.Count(item => item.ItemType == ItemTypes.Operational);
+            int operationalCount = model.Items.Count(item => item.ItemType == ItemTypeEnum.Operational);
 
             if (operationalCount != model.OperationalItemsCount)
             {

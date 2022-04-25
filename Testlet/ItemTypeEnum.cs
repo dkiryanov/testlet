@@ -1,6 +1,6 @@
 ﻿namespace Testlet
 {
-    public enum ItemTypes
+    public enum ItemTypeEnum
     {
         Pretest = 0,
         Operational = 1

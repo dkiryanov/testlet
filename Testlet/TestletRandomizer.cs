@@ -36,12 +36,12 @@ namespace Testlet
 
         private IList<Item> GetPretestItems(ITestletModel model)
         {
-            return model?.Items?.Where(item => item.ItemType == ItemTypes.Pretest).ToList() ?? throw new ArgumentNullException(nameof(model.Items));
+            return model?.Items?.Where(item => item.ItemType == ItemTypeEnum.Pretest).ToList() ?? throw new ArgumentNullException(nameof(model.Items));
         }
 
         private IList<Item> GetOperationalItems(ITestletModel model)
         {
-            return model?.Items?.Where(item => item.ItemType == ItemTypes.Operational).ToList() ?? throw new ArgumentNullException(nameof(model.Items));
+            return model?.Items?.Where(item => item.ItemType == ItemTypeEnum.Operational).ToList() ?? throw new ArgumentNullException(nameof(model.Items));
         }
     }
 }

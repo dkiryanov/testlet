@@ -10,10 +10,6 @@ namespace UnitTests
     [TestFixture]
     public class TestletRandomizerTests : TestBase
     {
-        private const int PretestItemsCount = 4;
-        private const int OperationalItemsCount = 6;
-        private const int ItemsCount = 10;
-
         private ITestletRandomizer _testletRandomizer;
 
         [SetUp]
@@ -26,40 +22,40 @@ namespace UnitTests
         public void Randomize_WellFormedTestletItems_ReturnsTestletWithTwoPretestsFirst()
         {
             // Arrange
-            ITestletModel testletModel = GetTestletModel(PretestItemsCount, OperationalItemsCount);
+            ITestletModel testletModel = GetTestletModel(Constants.DefaultPretestItemsCount, Constants.DefaultOperationalItemsCount);
 
             // Act
             ITestletModel result = _testletRandomizer.Randomize(testletModel);
 
             // Assert
             Assert.That(result, Is.Not.Null);
-            Assert.That(result.Items.Count, Is.EqualTo(ItemsCount));
+            Assert.That(result.Items.Count, Is.EqualTo(Constants.DefaultItemsCount));
 
-            List<Item> firstTwoItems = result.Items.Take(2).ToList();
+            List<Item> firstTwoItems = result.Items.Take(Constants.DefaultPretestItemsToTakeFirst).ToList();
 
-            Assert.That(firstTwoItems.All(item => item.ItemType == ItemTypes.Pretest), Is.True);
+            Assert.That(firstTwoItems.All(item => item.ItemType == ItemTypeEnum.Pretest), Is.True);
         }
 
         [Test]
         public void Randomize_WellFormedTestletItems_ReturnsTestletContainingTwoPretestAndSixOperationalItems()
         {
             // Arrange
-            ITestletModel testletModel = GetTestletModel(PretestItemsCount, OperationalItemsCount);
+            ITestletModel testletModel = GetTestletModel(Constants.DefaultPretestItemsCount, Constants.DefaultOperationalItemsCount);
 
             // Act
             ITestletModel result = _testletRandomizer.Randomize(testletModel);
 
             // Assert
             Assert.That(result, Is.Not.Null);
-            Assert.That(result.Items.Count, Is.EqualTo(ItemsCount));
+            Assert.That(result.Items.Count, Is.EqualTo(Constants.DefaultItemsCount));
 
-            List<Item> lastEightItems = result.Items.Skip(2).ToList();
+            List<Item> lastEightItems = result.Items.Skip(Constants.DefaultPretestItemsToTakeFirst).ToList();
 
-            int pretestItemsCount = lastEightItems.Count(item => item.ItemType == ItemTypes.Pretest);
-            Assert.That(pretestItemsCount, Is.EqualTo(2));
+            int pretestItemsCount = lastEightItems.Count(item => item.ItemType == ItemTypeEnum.Pretest);
+            Assert.That(pretestItemsCount, Is.EqualTo(Constants.DefaultPretestItemsToTakeFirst));
 
-            int operationalItemsCount = lastEightItems.Count(item => item.ItemType == ItemTypes.Operational);
-            Assert.That(operationalItemsCount, Is.EqualTo(6));
+            int operationalItemsCount = lastEightItems.Count(item => item.ItemType == ItemTypeEnum.Operational);
+            Assert.That(operationalItemsCount, Is.EqualTo(Constants.DefaultOperationalItemsCount));
         }
 
         [TestCase(0, 0)]

@@ -4,6 +4,6 @@
     {
         public string ItemId { get; set; }
 
-        public ItemTypes ItemType { get; set; }
+        public ItemTypeEnum ItemType { get; set; }
     }
 }

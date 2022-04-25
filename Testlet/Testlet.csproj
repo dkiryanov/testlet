@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="Exceptions\TestletValidationException.cs" />
     <Compile Include="Item.cs" />
-    <Compile Include="ItemTypes.cs" />
+    <Compile Include="ItemTypeEnum.cs" />
     <Compile Include="ITestletClient.cs" />
     <Compile Include="ITestletRandomizer.cs" />
     <Compile Include="Models\Constants.cs" />

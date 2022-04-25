@@ -24,7 +24,7 @@ namespace UnitTests
                 items.Add(new Item()
                 {
                     ItemId = $"operational-{i}",
-                    ItemType = ItemTypes.Operational
+                    ItemType = ItemTypeEnum.Operational
                 });
             }
 
@@ -33,7 +33,7 @@ namespace UnitTests
                 items.Add(new Item()
                 {
                     ItemId = $"pretest-{i}",
-                    ItemType = ItemTypes.Pretest
+                    ItemType = ItemTypeEnum.Pretest
                 });
             }
 

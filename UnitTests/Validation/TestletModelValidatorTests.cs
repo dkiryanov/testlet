@@ -9,9 +9,6 @@ namespace UnitTests.Validation
     [TestFixture]
     public class TestletModelValidatorTests : TestBase
     {
-        private const int PretestItemsCount = 4;
-        private const int OperationalItemsCount = 6;
-
         private ITestletModelValidator _validator;
 
         [SetUp]
@@ -28,7 +25,7 @@ namespace UnitTests.Validation
             ITestletModel testlet = new TestletModel()
             {
                 TestletId = testletId,
-                Items = GetTestletItems(PretestItemsCount, OperationalItemsCount)
+                Items = GetTestletItems(Constants.DefaultPretestItemsCount, Constants.DefaultOperationalItemsCount)
             };
 
             // Assert
@@ -51,7 +48,7 @@ namespace UnitTests.Validation
         public void Validate_TestletHasWrongNumberOfPretestItems_ThrowsTestletValidationException(int pretestItemsCount)
         {
             // Arrange
-            ITestletModel testlet = GetTestletModel(pretestItemsCount, OperationalItemsCount);
+            ITestletModel testlet = GetTestletModel(pretestItemsCount, Constants.DefaultOperationalItemsCount);
 
             // Assert
             TestletValidationException ex = Assert.Throws<TestletValidationException>(() => _validator.Validate(testlet));
@@ -64,7 +61,7 @@ namespace UnitTests.Validation
         public void Validate_TestletHasWrongNumberOfOperationalItems_ThrowsTestletValidationException(int operationalItemsCount)
         {
             // Arrange
-            ITestletModel testlet = GetTestletModel(PretestItemsCount, operationalItemsCount);
+            ITestletModel testlet = GetTestletModel(Constants.DefaultPretestItemsCount, operationalItemsCount);
 
             // Assert
             TestletValidationException ex = Assert.Throws<TestletValidationException>(() => _validator.Validate(testlet));
@@ -88,7 +85,7 @@ namespace UnitTests.Validation
         public void Validate_TestletIsWellFormed_DoesNotThrowException()
         {
             // Arrange
-            ITestletModel testlet = GetTestletModel(PretestItemsCount, OperationalItemsCount);
+            ITestletModel testlet = GetTestletModel(Constants.DefaultPretestItemsCount, Constants.DefaultOperationalItemsCount);
 
             // Assert
             Assert.DoesNotThrow(() => _validator.Validate(testlet));

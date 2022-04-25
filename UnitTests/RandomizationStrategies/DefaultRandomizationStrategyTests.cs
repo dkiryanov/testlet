@@ -44,10 +44,10 @@ namespace UnitTests.RandomizationStrategies
             Assert.That(randomizedItems, Is.Not.Null);
             Assert.That(randomizedItems.Count, Is.EqualTo(pretestItemsCount + operationalItemsCount));
 
-            int randomizedPretestItemsCount = randomizedItems.Count(item => item.ItemType == ItemTypes.Pretest);
+            int randomizedPretestItemsCount = randomizedItems.Count(item => item.ItemType == ItemTypeEnum.Pretest);
             Assert.That(randomizedPretestItemsCount, Is.EqualTo(pretestItemsCount));
 
-            int randomizedOperationalItemsCount = randomizedItems.Count(item => item.ItemType == ItemTypes.Operational);
+            int randomizedOperationalItemsCount = randomizedItems.Count(item => item.ItemType == ItemTypeEnum.Operational);
             Assert.That(randomizedOperationalItemsCount, Is.EqualTo(operationalItemsCount));
         }
     }
