@@ -4,6 +4,6 @@ namespace Testlet.RandomizationStrategies
 {
     public interface IRandomizationStrategy
     {
-        IList<Item> Randomize(IList<Item> items);
+        List<Item> Randomize(IEnumerable<Item> items);
     }
 }

@@ -19,29 +19,27 @@ namespace Testlet
         {
             IRandomizationStrategy randomizationStrategy = strategy ?? _randomizationStrategy;
 
-            IList<Item> pretestItems = GetPretestItems(model);
-            IList<Item> operationalItems = GetOperationalItems(model);
+            List<Item> firstPart = GetFirstPart(model, randomizationStrategy);
+            List<Item> secondPart = GetSecondPart(model, firstPart, randomizationStrategy);
 
-            IList<Item> randomizedPretestItems = randomizationStrategy.Randomize(pretestItems);
-
-            randomizedPretestItems.Skip(model.PretestItemsToTakeFirst).ToList().ForEach(item => operationalItems.Add(item));
-
-            List<Item> randomizedItems = randomizedPretestItems.Take(model.PretestItemsToTakeFirst).ToList();
-            randomizationStrategy.Randomize(operationalItems).ToList().ForEach(item => randomizedItems.Add(item));
-
-            model.Items = randomizedItems;
+            firstPart.AddRange(secondPart);
+            model.Items = firstPart;
 
             return model;
         }
 
-        private IList<Item> GetPretestItems(ITestletModel model)
+        private List<Item> GetFirstPart(ITestletModel model, IRandomizationStrategy strategy)
         {
-            return model?.Items?.Where(item => item.ItemType == ItemTypeEnum.Pretest).ToList() ?? throw new ArgumentNullException(nameof(model.Items));
+            IEnumerable<Item> items = model?.Items?.Where(item => item.ItemType == ItemTypeEnum.Pretest) ?? throw new ArgumentNullException(nameof(model.Items));
+
+            return strategy.Randomize(items);
         }
 
-        private IList<Item> GetOperationalItems(ITestletModel model)
+        private List<Item> GetSecondPart(ITestletModel model, List<Item> pretestItemsToSkip, IRandomizationStrategy strategy)
         {
-            return model?.Items?.Where(item => item.ItemType == ItemTypeEnum.Operational).ToList() ?? throw new ArgumentNullException(nameof(model.Items));
+            IEnumerable<Item> items = model?.Items?.Where(item => !pretestItemsToSkip.Contains(item)) ?? throw new ArgumentNullException(nameof(model.Items));
+
+            return strategy.Randomize(items);
         }
     }
 }

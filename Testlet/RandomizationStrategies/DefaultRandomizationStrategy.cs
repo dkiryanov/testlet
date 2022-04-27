@@ -6,7 +6,7 @@ namespace Testlet.RandomizationStrategies
 {
     public class DefaultRandomizationStrategy : IRandomizationStrategy
     {
-        public IList<Item> Randomize(IList<Item> items)
+        public List<Item> Randomize(IEnumerable<Item> items)
         {
             if (items == null)
             {
