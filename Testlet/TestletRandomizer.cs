@@ -29,7 +29,8 @@ namespace Testlet
 
         private List<Item> GetFirstPart(ITestletModel model, IRandomizationStrategy strategy)
         {
-            IEnumerable<Item> items = model?.Items?.Where(item => item.ItemType == ItemTypeEnum.Pretest) ?? throw new ArgumentNullException(nameof(model.Items));
+            IEnumerable<Item> items = model?.Items?.Where(item => item.ItemType == ItemTypeEnum.Pretest)
+                .Take(model.PretestItemsToTakeFirst) ?? throw new ArgumentNullException(nameof(model.Items));
 
             return strategy.Randomize(items);
         }
