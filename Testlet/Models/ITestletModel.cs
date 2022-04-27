@@ -12,6 +12,6 @@ namespace Testlet.Models
 
         string TestletId { get; set; }
 
-        IList<Item> Items { get; set; }
+        IEnumerable<Item> Items { get; set; }
     }
 }

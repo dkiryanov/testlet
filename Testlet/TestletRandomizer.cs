@@ -19,11 +19,10 @@ namespace Testlet
         {
             IRandomizationStrategy randomizationStrategy = strategy ?? _randomizationStrategy;
 
-            List<Item> firstPart = GetFirstPart(model, randomizationStrategy);
-            List<Item> secondPart = GetSecondPart(model, firstPart, randomizationStrategy);
+            IEnumerable<Item> firstPart = GetFirstPart(model, randomizationStrategy);
+            IEnumerable<Item> secondPart = GetSecondPart(model, firstPart, randomizationStrategy);
 
-            firstPart.AddRange(secondPart);
-            model.Items = firstPart;
+            model.Items = firstPart.Concat(secondPart);
 
             return model;
         }
@@ -35,7 +34,7 @@ namespace Testlet
             return strategy.Randomize(items);
         }
 
-        private List<Item> GetSecondPart(ITestletModel model, List<Item> pretestItemsToSkip, IRandomizationStrategy strategy)
+        private List<Item> GetSecondPart(ITestletModel model, IEnumerable<Item> pretestItemsToSkip, IRandomizationStrategy strategy)
         {
             IEnumerable<Item> items = model?.Items?.Where(item => !pretestItemsToSkip.Contains(item)) ?? throw new ArgumentNullException(nameof(model.Items));
 
