@@ -5,8 +5,6 @@ namespace Testlet
 {
     public interface ITestletClient
     {
-        ITestletModel CreateTestlet(string testletId, IList<Item> items); 
-
-
+        ITestletModel CreateTestlet(string testletId, IList<Item> items);
     }
 }
