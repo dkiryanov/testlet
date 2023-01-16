@@ -3,7 +3,7 @@ using Testlet.Models;
 using Testlet.RandomizationStrategies;
 using Testlet.Validation;
 
-namespace Testlet // some comment for tests
+namespace Testlet
 {
     public class TestletClient : ITestletClient
     {
